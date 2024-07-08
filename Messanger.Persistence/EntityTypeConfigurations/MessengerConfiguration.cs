@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Messenger.Persistence.EntityTypeConfigurations;
 
-public class MessengerConfiguration : IEntityTypeConfiguration<Msger>
+public class MessengerConfiguration : IEntityTypeConfiguration<Message>
 {
-    public void Configure(EntityTypeBuilder<Msger> builder)
+    public void Configure(EntityTypeBuilder<Message> builder)
     {
         
     }

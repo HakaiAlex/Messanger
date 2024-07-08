@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Messenger.Domain;
 
-namespace Messenger.Domain
+public class User
 {
-    internal class User
-    {
-    }
+    public int ID { get; set; }
+    public string Username { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string PasswordHash { get; set; } = null!;
+    public string? ProfilePicture { get; set; }
+    public string Status { get; set; } = null!;
 }
