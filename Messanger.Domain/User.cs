@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Messanger.Domain
+namespace Messenger.Domain
 {
     internal class User
     {

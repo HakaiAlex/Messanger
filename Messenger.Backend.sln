@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messanger.WebApi", "Messanger\Messanger.WebApi.csproj", "{1426EEFE-9355-4A0A-837D-03AE5DDAD672}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.WebApi", "Messanger\Messenger.WebApi.csproj", "{1426EEFE-9355-4A0A-837D-03AE5DDAD672}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{89C2C96F-8B7C-402E-878D-163316FAFA9F}"
 EndProject
@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C2232D9F-F4F0-4F22-B994-3124706306CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messanger.Domain", "Messanger.Domain\Messanger.Domain.csproj", "{2D203F61-9BC5-4D1B-B171-65EFB229E5E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Domain", "Messanger.Domain\Messenger.Domain.csproj", "{2D203F61-9BC5-4D1B-B171-65EFB229E5E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messanger.Application", "Messanger.Application\Messanger.Application.csproj", "{78C6821D-DC68-4788-AA2D-87FE2BB92879}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Application", "Messanger.Application\Messenger.Application.csproj", "{78C6821D-DC68-4788-AA2D-87FE2BB92879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messanger.Persistence", "Messanger.Persistence\Messanger.Persistence.csproj", "{2488DECA-2062-4370-987C-EC21B135B8D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Persistence", "Messanger.Persistence\Messenger.Persistence.csproj", "{2488DECA-2062-4370-987C-EC21B135B8D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
