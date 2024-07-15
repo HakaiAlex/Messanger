@@ -1,10 +1,8 @@
-﻿using Messenger.Domain;
-
-namespace Messenger.Persistence.Entities;
+﻿namespace Messenger.Persistence.Entities;
 
 public class ChatEntity
 {
     public int ID { get; set; }
-    public List<int>? Participants { get; set; }
-    public List<MessageEntity> Messages { get; set; } = null!;
+    public ICollection<UserEntity> Participants { get; set; } = [];
+    public ICollection<MessageEntity> Messages { get; set; } = [];
 }

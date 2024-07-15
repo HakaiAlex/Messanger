@@ -6,6 +6,9 @@ public class MessageEntity
     public int SenderID { get; set; }
     public int ReceiverID { get; set; }
     public string Content { get; set; } = null!;
-    public DateTime TimeStamp { get; set; }
+    public DateTime Timestamp { get; set; }
     public bool IsRead { get; set; }
+
+    public UserEntity Sender { get; set; } = null!;
+    public UserEntity Receiver { get; set; } = null!;
 }
