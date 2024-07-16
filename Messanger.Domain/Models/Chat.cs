@@ -1,4 +1,4 @@
-﻿namespace Messenger.Domain;
+﻿namespace Messenger.Domain.Models;
 
 public class Chat
 {
