@@ -1,8 +1,19 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Common;
 
-public class Chat
+namespace Domain.Entities;
+
+public class Chat : Base
 {
-    public Guid ID { get; set; }
-    public List<Guid> Participants { get; set; } = [];
-    public List<Message> Messages { get; set; } = [];
+    public ICollection<User> Participants { get; private set; } = [];
+    public ICollection<Message> Messages { get; private set; } = [];
+    public int AdminId { get; private set; }
+
+    private Chat() { }
+
+    public Chat(ICollection<User> participants, ICollection<Message> messages, int adminId)
+    {
+        Participants = participants;
+        Messages = messages;
+        AdminId = adminId;
+    }
 }

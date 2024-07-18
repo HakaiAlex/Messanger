@@ -1,11 +1,28 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Common;
 
-public class Message
+namespace Domain.Entities;
+
+public class Message : Base
 {
-    public Guid ID { get; set; }
-    public Guid SenderID { get; set; }
-    public Guid ReceiverID { get; set; }
-    public string Content { get; set; } = null!;
-    public DateTime Timestamp { get; set; }
-    public bool IsRead { get; set; }
+    public int SenderID { get; private set; }
+    public int ReceiverID { get; private set; }
+    public string Content { get; private set; } = null!;
+    public DateTime Timestamp { get; private set; }
+    public bool IsRead { get; private set; }
+
+    public User Sender { get; private set; } = null!;
+    public User Receiver { get; private set; } = null!;
+
+    private Message() { }
+
+    public Message(int senderID, int receiverID, string content, DateTime timestamp, bool isRead, User sender, User receiver)
+    {
+        SenderID = senderID;
+        ReceiverID = receiverID;
+        Content = content;
+        Timestamp = timestamp;
+        IsRead = isRead;
+        Sender = sender;
+        Receiver = receiver;
+    }
 }
