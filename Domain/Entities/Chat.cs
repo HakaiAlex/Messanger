@@ -7,7 +7,7 @@ public class Chat : Base
     public ICollection<User> Participants { get; private set; } = [];
     public ICollection<Message> Messages { get; private set; } = [];
     public int AdminId { get; private set; }
-    public User Admin { get; private set; }
+    public User Admin { get; private set; } = null!;
 
     private Chat() { }
 
