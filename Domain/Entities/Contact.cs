@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class Contact : Base
+public class Contact
 {
     public int UserID { get; private set; }
     public int ContactID { get; private set; }
