@@ -10,25 +10,39 @@ public class User : Base
     public string? ProfilePicture { get; private set; }
     public string Status { get; private set; } = "Offline";
 
-    public ICollection<Message> SentMessages { get; private set; } = [];
-    public ICollection<Message> ReceivedMessages { get; private set; } = [];
-    public ICollection<Contact> Contacts { get; private set; } = [];
-    public ICollection<Chat> Chats { get; private set; } = [];
+    public Dictionary<User, Message> SentMessages { get; private set; } = [];
+    public Dictionary<User, Message> ReceivedMessages { get; private set; } = [];
+    public List<Contact> Contacts { get; private set; } = [];
+    public List<Chat> Chats { get; private set; } = [];
 
     private User() { }
 
-    public User(string username, string email, string passwordHash, string profilePicture, string status
-        , ICollection<Message> sentMessages, ICollection<Message> receivedMessages, ICollection<Contact> contacts
-        , ICollection<Chat> chats)
+    public User(string username, string email, string passwordHash, string profilePicture, string status)
     {
         Username = username;
         Email = email;
         PasswordHash = passwordHash;
         ProfilePicture = profilePicture;
         Status = status;
-        SentMessages = sentMessages;
-        ReceivedMessages = receivedMessages;
-        Contacts = contacts;
-        Chats = chats;
+    }
+
+    public void SendMessage(User user, Message message)
+    {
+        SentMessages.Add(user, message);
+    }
+
+    public void ReceiveMessage(User user, Message message)
+    {
+        ReceivedMessages.Add(user, message);
+    }
+
+    public Dictionary<User, Message> GetSentMessages()
+    {
+        return SentMessages;
+    }
+
+    public Dictionary<User, Message> GetReceivedMessages()
+    {
+        return SentMessages;
     }
 }

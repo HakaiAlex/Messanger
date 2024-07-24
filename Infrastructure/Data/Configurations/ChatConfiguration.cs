@@ -9,14 +9,23 @@ public class ChatConfiguration : IEntityTypeConfiguration<Chat>
     public void Configure(EntityTypeBuilder<Chat> builder)
     {
         builder.HasKey(c => c.Id);
+        builder.Property(c => c.IsGroupChat)
+            .IsRequired();
+        builder.Property(c => c.AdminId)
+            .IsRequired();
+
+        builder.HasOne(c => c.Admin)
+            .WithMany(u => u.Chats)
+            .HasForeignKey(c => c.AdminId)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(c => c.Participants)
-            .WithMany(u => u.Chats);
+            .WithMany(u => u.Chats)
+            .UsingEntity<Dictionary<string, object>>(
+                      "ChatUser",
+                      j => j.HasOne<User>().WithMany().HasForeignKey("UserId"),
+                      j => j.HasOne<Chat>().WithMany().HasForeignKey("ChatId"));
         builder.HasMany(c => c.Messages)
-            .WithOne()
-            .HasForeignKey(m => m.Id);
-        builder.HasOne(g => g.Admin)
-                .WithMany()
-                .HasForeignKey(g => g.AdminId)
-                .OnDelete(DeleteBehavior.Restrict);
+            .WithOne(m => m.Chat)
+            .HasForeignKey(m => m.ChatId);
     }
 }

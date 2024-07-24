@@ -24,7 +24,6 @@ public static class DependencyInjection
 
         services.AddScoped<MessengerDbContextInitializer>();
 
-
         return services;
     }
 
