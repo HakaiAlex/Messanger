@@ -11,21 +11,11 @@ public class ChatConfiguration : IEntityTypeConfiguration<Chat>
         builder.HasKey(c => c.Id);
         builder.Property(c => c.IsGroupChat)
             .IsRequired();
-        builder.Property(c => c.AdminId)
-            .IsRequired();
 
-        builder.HasOne(c => c.Admin)
-            .WithMany(u => u.Chats)
-            .HasForeignKey(c => c.AdminId)
-            .OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(c => c.Participants)
-            .WithMany(u => u.Chats)
-            .UsingEntity<Dictionary<string, object>>(
-                      "ChatUser",
-                      j => j.HasOne<User>().WithMany().HasForeignKey("UserId"),
-                      j => j.HasOne<Chat>().WithMany().HasForeignKey("ChatId"));
+            .WithMany(u => u.Chats);
         builder.HasMany(c => c.Messages)
-            .WithOne(m => m.Chat)
+            .WithOne(t => t.Chat)
             .HasForeignKey(m => m.ChatId);
     }
 }

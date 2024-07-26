@@ -5,7 +5,7 @@ namespace Domain.Entities;
 public class Contact
 {
     public int UserID { get; private set; }
-    public int ContactID { get; private set; }
+    public int ContactUserId { get; private set; }
     public string Status { get; private set; } = "Offline";
 
     public User User { get; private set; } = null!;
@@ -13,10 +13,10 @@ public class Contact
 
     private Contact() { }
 
-    public Contact(int userID, int contactID, string status, User user, User contactUser)
+    public Contact(int userID, int contactUserId, string status, User user, User contactUser)
     {
         UserID = userID;
-        ContactID = contactID;
+        ContactUserId = contactUserId;
         Status = status;
         User = user;
         ContactUser = contactUser;

@@ -4,14 +4,24 @@ namespace Domain.Entities;
 
 public class User : Base
 {
+    /*
+     * Unable to create a 'DbContext' of type ''. 
+     * The exception 'Cannot create a relationship between 'Chat.Participants' and 'User.Chats' 
+     * because a relationship already exists between 'User.Chats' and 'Chat.Admin'. 
+     * Navigations can only participate in a single relationship. 
+     * If you want to override an existing relationship call 'Ignore' on the navigation 'User.Chats' first in 'OnModelCreating'.' 
+     * was thrown while attempting to create an instance. 
+     * For the different patterns supported at design time, see https://go.microsoft.com/fwlink/?linkid=851728
+     * 
+     */
     public string Username { get; private set; } = null!;
     public string Email { get; private set; } = null!;
     public string PasswordHash { get; private set; } = null!;
     public string? ProfilePicture { get; private set; }
     public string Status { get; private set; } = "Offline";
 
-    public Dictionary<User, Message> SentMessages { get; private set; } = [];
-    public Dictionary<User, Message> ReceivedMessages { get; private set; } = [];
+    public List<Message> SentMessages { get; private set; } = [];
+    public List<Message> ReceivedMessages { get; private set; } = [];
     public List<Contact> Contacts { get; private set; } = [];
     public List<Chat> Chats { get; private set; } = [];
 
@@ -26,23 +36,39 @@ public class User : Base
         Status = status;
     }
 
-    public void SendMessage(User user, Message message)
+    public void SendMessage(Message message)
     {
-        SentMessages.Add(user, message);
+        SentMessages.Add(message);
     }
 
-    public void ReceiveMessage(User user, Message message)
+    public void ReceiveMessage(Message message)
     {
-        ReceivedMessages.Add(user, message);
+        ReceivedMessages.Add(message);
     }
 
-    public Dictionary<User, Message> GetSentMessages()
+    public List<Message> GetSentMessages()
     {
         return SentMessages;
     }
 
-    public Dictionary<User, Message> GetReceivedMessages()
+    public List<Message> GetReceivedMessages()
     {
-        return SentMessages;
+        return ReceivedMessages;
+    }
+
+    public void CreateChat(int id, string chatName)
+    {
+        var chat = new Chat(id, true, chatName);
+        AddChat(chat);
+    }
+
+    public void RemoveChat(Chat chat)
+    {
+        Chats.Remove(chat);
+    }
+
+    private void AddChat(Chat chat)
+    {
+        Chats.Add(chat);
     }
 }
