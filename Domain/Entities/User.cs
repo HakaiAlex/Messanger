@@ -1,29 +1,25 @@
 ﻿using Domain.Common;
+using System.Collections.Generic;
 
 namespace Domain.Entities;
 
 public class User : Base
 {
-    /*
-     * Unable to create a 'DbContext' of type ''. 
-     * The exception 'Cannot create a relationship between 'Chat.Participants' and 'User.Chats' 
-     * because a relationship already exists between 'User.Chats' and 'Chat.Admin'. 
-     * Navigations can only participate in a single relationship. 
-     * If you want to override an existing relationship call 'Ignore' on the navigation 'User.Chats' first in 'OnModelCreating'.' 
-     * was thrown while attempting to create an instance. 
-     * For the different patterns supported at design time, see https://go.microsoft.com/fwlink/?linkid=851728
-     * 
-     */
     public string Username { get; private set; } = null!;
     public string Email { get; private set; } = null!;
     public string PasswordHash { get; private set; } = null!;
     public string? ProfilePicture { get; private set; }
     public string Status { get; private set; } = "Offline";
 
-    public List<Message> SentMessages { get; private set; } = [];
-    public List<Message> ReceivedMessages { get; private set; } = [];
-    public List<Contact> Contacts { get; private set; } = [];
-    public List<Chat> Chats { get; private set; } = [];
+    private readonly List<Message> _sentMessages = [];
+    private readonly List<Message> _receivedMessages = [];
+    private readonly List<Contact> _contacts = [];
+    private readonly List<Chat> _chats = [];
+
+    public IReadOnlyCollection<Message> SentMessages => _sentMessages.AsReadOnly();
+    public IReadOnlyCollection<Message> ReceivedMessages => _receivedMessages.AsReadOnly();
+    public IReadOnlyCollection<Contact> Contacts => _contacts.AsReadOnly();
+    public IReadOnlyCollection<Chat> Chats => _chats.AsReadOnly();
 
     private User() { }
 
@@ -36,39 +32,45 @@ public class User : Base
         Status = status;
     }
 
-    public void SendMessage(Message message)
+    public void AddContact(User contactUser)
     {
-        SentMessages.Add(message);
+        ArgumentNullException.ThrowIfNull(contactUser);
+        if (_contacts.Any(c => c.ContactUserId == contactUser.Id))
+        {
+            throw new InvalidOperationException("Contact already exist!");
+        }
+
+        var contact = new Contact(Id, contactUser.Id);
+        _contacts.Add(contact);
     }
 
-    public void ReceiveMessage(Message message)
+    public void RemoveContact(User contactUser)
     {
-        ReceivedMessages.Add(message);
+        ArgumentNullException.ThrowIfNull(contactUser);
+        var contact = _contacts.FirstOrDefault(c => c.ContactUserId == contactUser.Id)
+            ?? throw new InvalidOperationException("Contact does not exist.");
+
+        _contacts.Remove(contact);
     }
 
-    public List<Message> GetSentMessages()
-    {
-        return SentMessages;
-    }
+    //public void AddChat(int id)
+    //{
+    //    ArgumentNullException.ThrowIfNull(contactUser);
+    //    if (_contacts.Any(c => c.ContactUserId == contactUser.Id))
+    //    {
+    //        throw new InvalidOperationException("Contact already exist!");
+    //    }
 
-    public List<Message> GetReceivedMessages()
-    {
-        return ReceivedMessages;
-    }
+    //    var contact = new Contact(Id, contactUser.Id);
+    //    _contacts.Add(contact);
+    //}
 
-    public void CreateChat(int id, string chatName)
-    {
-        var chat = new Chat(id, true, chatName);
-        AddChat(chat);
-    }
+    //public void RemoveContact(User contactUser)
+    //{
+    //    ArgumentNullException.ThrowIfNull(contactUser);
+    //    var contact = _contacts.FirstOrDefault(c => c.ContactUserId == contactUser.Id)
+    //        ?? throw new InvalidOperationException("Contact does not exist.");
 
-    public void RemoveChat(Chat chat)
-    {
-        Chats.Remove(chat);
-    }
-
-    private void AddChat(Chat chat)
-    {
-        Chats.Add(chat);
-    }
+    //    _contacts.Remove(contact);
+    //}
 }

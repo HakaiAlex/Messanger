@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
@@ -19,15 +20,12 @@ public class Message : Base
     private Message() { }
 
     public Message(
-        int senderID, 
+        int senderID,
         int receiverID, 
         string content, 
         DateTime timestamp, 
         bool isDeliver,
-        bool isRead, 
-        User sender, 
-        User receiver, 
-        Chat chat)
+        bool isRead)
     {
         SenderId = senderID;
         ReceiverId = receiverID;
@@ -35,8 +33,5 @@ public class Message : Base
         Timestamp = timestamp;
         IsDeliver = isDeliver;
         IsRead = isRead;
-        Sender = sender;
-        Receiver = receiver;
-        Chat = chat;
     }
 }

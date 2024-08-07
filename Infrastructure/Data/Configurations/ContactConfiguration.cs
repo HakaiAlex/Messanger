@@ -9,6 +9,7 @@ public class ContactConfiguration : IEntityTypeConfiguration<Contact>
     public void Configure(EntityTypeBuilder<Contact> builder)
     {
         builder.HasKey(c => new { c.UserID, c.ContactUserId });
+
         builder.HasOne(c => c.User)
             .WithMany(u => u.Contacts)
             .HasForeignKey(c => c.UserID)

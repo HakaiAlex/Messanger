@@ -9,6 +9,7 @@ public class ChatConfiguration : IEntityTypeConfiguration<Chat>
     public void Configure(EntityTypeBuilder<Chat> builder)
     {
         builder.HasKey(c => c.Id);
+
         builder.Property(c => c.IsGroupChat)
             .IsRequired();
 

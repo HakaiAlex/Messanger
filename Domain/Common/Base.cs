@@ -2,5 +2,5 @@
 
 public abstract class Base
 {
-    public virtual int Id { get; protected set; }
+    public virtual int Id { get; set; }
 }

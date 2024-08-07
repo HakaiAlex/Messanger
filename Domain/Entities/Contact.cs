@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
@@ -13,12 +14,10 @@ public class Contact
 
     private Contact() { }
 
-    public Contact(int userID, int contactUserId, string status, User user, User contactUser)
+    public Contact(int userID, int contactUserId, string status = "Offline")
     {
         UserID = userID;
         ContactUserId = contactUserId;
         Status = status;
-        User = user;
-        ContactUser = contactUser;
     }
 }

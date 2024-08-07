@@ -7,24 +7,19 @@ public class Chat : Base
     public string? ChatName { get; private set; }
     public bool IsGroupChat { get; private set; } = false;
 
-    public List<User> Participants { get; private set; } = [];
-    public List<Message> Messages { get; private set; } = [];
+    private readonly List<User> _users = [];
+    private readonly List<Message> _messages = [];
+    public IReadOnlyCollection<User> Participants => _users.AsReadOnly();
+    public IReadOnlyCollection<Message> Messages => _messages.AsReadOnly();
 
 
     private Chat() { }
 
-    public Chat (int id)
-    {
-        Id = id;
-    }
-
     public Chat(
-        int id,
-        bool isGroupChat, 
-        string chatName)
+        string chatName,
+        bool isGroupChat = false) 
     {
-        Id = id;
-        IsGroupChat = isGroupChat;
         ChatName = chatName;
+        IsGroupChat = isGroupChat;
     }
 }
